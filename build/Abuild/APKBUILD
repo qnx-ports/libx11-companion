@@ -1,0 +1,27 @@
+pkgname="libx11" # Fake package for providing x11 locale data files
+pkgver=1
+pkgrel=0
+pkgdesc="Fake package for providing x11 locale data files"
+url="https://xorg.freedesktop.org/"
+arch="all"
+license="X11"
+options="!strip !check"
+depends=""
+source="locale.tar.gz"
+
+prepare() {
+   for tarball in *.tar.gz; do
+        tar xf $tarball
+   done
+}
+
+package() {
+    cd "$srcdir"
+
+    mkdir -p "$pkgdir"/usr
+    cp -r usr/* "$pkgdir"/usr
+}
+
+sha512sums="
+885b2975d2e8de50763bb7dd1db91a8b935d8cd3f0733046957a9390eb325c84a19d1c5f96aa49bc5180bdacc1f202743e4993b7b5ef1f8bd6f2ca71177c5ec3  locale.tar.gz
+"
